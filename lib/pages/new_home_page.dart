@@ -112,10 +112,16 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void initMarker() {
+  void initMarker() async {
+    var customMarkerIcon = await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(),
+      'assets/mages/marker_icon.png',
+    );
+
     var myMarkers = PlaceModel.places
         .map(
           (placeModel) => Marker(
+            icon: customMarkerIcon,
             infoWindow: InfoWindow(title: placeModel.name),
             markerId: MarkerId(placeModel.id.toString()),
             position: placeModel.latLng,
@@ -123,6 +129,6 @@ class _HomePageState extends State<HomePage> {
         )
         .toSet();
     markers.addAll(myMarkers);
-    // markers.add(myMarker);
+    setState(() {});
   }
 }
