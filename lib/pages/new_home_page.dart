@@ -33,6 +33,14 @@ class _HomePageState extends State<HomePage> {
   وبكدا اقدر اتحكم في 
   google map
   */
+  //! controller.animatedCamera لو انا عاوز اعمل انيميت للكميرا
+  /*
+  اقدر اعمل انيميت لاكتر من حاجه زي
+   camera 
+   latlong
+   latlongzoom
+   علي حسب انا محتاج اعمل ابديت ل اي بالظبط
+  */
   late CameraPosition initialCameraPosition;
   late GoogleMapController googleMapController;
   @override
@@ -53,17 +61,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GoogleMap(
-        onMapCreated: (controller) {
-          googleMapController = controller;
-        },
-        cameraTargetBounds: CameraTargetBounds(
-          LatLngBounds(
-            southwest: const LatLng(31.01894681296261, 31.34570983189044),
-            northeast: const LatLng(31.082838279807444, 31.420122594768927),
+      body: Stack(
+        children: [
+          GoogleMap(
+            onMapCreated: (controller) {
+              googleMapController = controller;
+            },
+            // cameraTargetBounds: CameraTargetBounds(
+            //   LatLngBounds(
+            //     southwest: const LatLng(31.01894681296261, 31.34570983189044),
+            //     northeast: const LatLng(31.082838279807444, 31.420122594768927),
+            //   ),
+            // ),
+            initialCameraPosition: initialCameraPosition,
           ),
-        ),
-        initialCameraPosition: initialCameraPosition,
+          Positioned(
+            bottom: 16,
+            left: 16,
+            right: 16,
+            child: ElevatedButton(
+              onPressed: () {
+                CameraPosition newCamerPosition = const CameraPosition(
+                  zoom: 12,
+                  target: LatLng(
+                    30.882163589907847,
+                    31.457489329231365,
+                  ),
+                );
+                googleMapController.animateCamera(
+                  CameraUpdate.newCameraPosition(newCamerPosition),
+                );
+              },
+              child: const Text('change postion'),
+            ),
+          )
+        ],
       ),
     );
   }
