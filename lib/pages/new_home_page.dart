@@ -49,6 +49,7 @@ class _HomePageState extends State<HomePage> {
    عشان مينفعش اكرر مكان 
    - كل مكان بيكون له مركر واحد مش شرط اكتر من مركر يشاور علي نفس المكان
   */
+  //! infoWindow لو انا عاوز اضيف بيانات للمركر بتاعي
   late CameraPosition initialCameraPosition;
   late GoogleMapController googleMapController;
   Set<Marker> markers = {};
@@ -115,6 +116,7 @@ class _HomePageState extends State<HomePage> {
     var myMarkers = PlaceModel.places
         .map(
           (placeModel) => Marker(
+            infoWindow: InfoWindow(title: placeModel.name),
             markerId: MarkerId(placeModel.id.toString()),
             position: placeModel.latLng,
           ),
