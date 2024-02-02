@@ -57,6 +57,7 @@ class _HomePageState extends State<HomePage> {
       zoom: 10,
       target: LatLng(31.0399088096436, 31.38043737066807),
     );
+    initMarker();
     super.initState();
   }
 
@@ -107,5 +108,17 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+  }
+
+  void initMarker() {
+    var myMarker = const Marker(
+      markerId: MarkerId('1'),
+      position: LatLng(
+        30.882163589907847,
+        31.457489329231365,
+      ),
+    );
+
+    markers.add(myMarker);
   }
 }
