@@ -24,7 +24,17 @@ class _HomePageState extends State<HomePage> {
    southWest -> محدد مكان جنوب غرب
    northeast -> محدد مكان شمال شرق
   */
+
+  //? Google map controller لو انا عاوز اتحكم في جوجل ماب محتاج اعمل كونترولر
+  /*
+  بس هنا مش هعمل هنشيلايز للكونترولر دا في انيت استست هيكون عندي فانكشن اسمها 
+  on map create 
+  دي اقدر استقبل منها كونترولر واسويها بالكونترولر اللي انا عملته 
+  وبكدا اقدر اتحكم في 
+  google map
+  */
   late CameraPosition initialCameraPosition;
+  late GoogleMapController googleMapController;
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -35,9 +45,18 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
+  void dispose() {
+    googleMapController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        onMapCreated: (controller) {
+          googleMapController = controller;
+        },
         cameraTargetBounds: CameraTargetBounds(
           LatLngBounds(
             southwest: const LatLng(31.01894681296261, 31.34570983189044),
