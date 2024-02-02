@@ -18,6 +18,12 @@ class _HomePageState extends State<HomePage> {
   street view 13 -> 17
   building view 18 -> 20
   */
+  //! bounds بتحدد الحدود بتاعتي في كاميرا مينفعش اتخطاها (مينفعش يعمل زووم اللي علي المكان اللي انا حديته)
+  /*
+  latLongBounds -
+   southWest -> محدد مكان جنوب غرب
+   northeast -> محدد مكان شمال شرق
+  */
   late CameraPosition initialCameraPosition;
   @override
   void initState() {
@@ -32,6 +38,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: GoogleMap(
+        cameraTargetBounds: CameraTargetBounds(
+          LatLngBounds(
+            southwest: const LatLng(31.01894681296261, 31.34570983189044),
+            northeast: const LatLng(31.082838279807444, 31.420122594768927),
+          ),
+        ),
         initialCameraPosition: initialCameraPosition,
       ),
     );
