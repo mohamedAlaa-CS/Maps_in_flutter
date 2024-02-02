@@ -41,8 +41,16 @@ class _HomePageState extends State<HomePage> {
    latlongzoom
    علي حسب انا محتاج اعمل ابديت ل اي بالظبط
   */
+
+  //? markers اننا احدد مركر او علامه علي الخريطه
+  /*
+   بيكون كم نوع set
+   عشان مينفعش اكرر مكان 
+   - كل مكان بيكون له مركر واحد مش شرط اكتر من مركر يشاور علي نفس المكان
+  */
   late CameraPosition initialCameraPosition;
   late GoogleMapController googleMapController;
+  Set<Marker> markers = {};
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -73,6 +81,7 @@ class _HomePageState extends State<HomePage> {
             //     northeast: const LatLng(31.082838279807444, 31.420122594768927),
             //   ),
             // ),
+            markers: markers,
             initialCameraPosition: initialCameraPosition,
           ),
           Positioned(
