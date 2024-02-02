@@ -11,7 +11,7 @@ class PlaceModel {
     required this.latLng,
   });
 
-  List<PlaceModel> places = [
+  static List<PlaceModel> places = [
     PlaceModel(
         id: 1,
         name: 'المصريه للاتصالات اولاد صقر',
