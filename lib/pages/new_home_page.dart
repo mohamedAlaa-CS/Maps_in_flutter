@@ -94,6 +94,9 @@ class _HomePageState extends State<HomePage> {
             //     northeast: const LatLng(31.082838279807444, 31.420122594768927),
             //   ),
             // ),
+
+            // لو انا عاوز اخفي الزوم ان اللي بتكون مجوده علي اليمين
+            zoomControlsEnabled: false,
             markers: markers,
             initialCameraPosition: initialCameraPosition,
           ),
