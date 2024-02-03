@@ -1,4 +1,7 @@
+import 'dart:ui' as ui;
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:map/models/place_model.dart';
 
@@ -50,6 +53,13 @@ class _HomePageState extends State<HomePage> {
    - كل مكان بيكون له مركر واحد مش شرط اكتر من مركر يشاور علي نفس المكان
   */
   //! infoWindow لو انا عاوز اضيف بيانات للمركر بتاعي
+  //? size of marker لو انا عاوز اغير حجم الماركر
+  /*
+لو انا عاوز اغير حجم الماركر قدامي طريقتين 
+١ -> ان احنا نكتب كود زي الميثود (getImageFormRawData)
+٢ -> ان احنا نستخدم تول من علي النت زي مثلا (image resize)
+ودي بحدد فيها الطول والعرض اللي انا عاوزه
+  */
   late CameraPosition initialCameraPosition;
   late GoogleMapController googleMapController;
   Set<Marker> markers = {};
@@ -112,11 +122,21 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void initMarker() async {
-    var customMarkerIcon = await BitmapDescriptor.fromAssetImage(
-      const ImageConfiguration(),
-      'assets/mages/marker_icon.png',
+  Future<Uint8List> getImageFormRawData(String image, double width) async {
+    var imageData = await rootBundle.load(image);
+    var imageCodec = await ui.instantiateImageCodec(
+      imageData.buffer.asUint8List(),
+      targetWidth: width.round(),
     );
+    var imageFrame = await imageCodec.getNextFrame();
+    var imageBytData =
+        await imageFrame.image.toByteData(format: ui.ImageByteFormat.png);
+    return imageBytData!.buffer.asUint8List();
+  }
+
+  void initMarker() async {
+    var customMarkerIcon = BitmapDescriptor.fromBytes(
+        await getImageFormRawData('assets/mages/marker_icon.png', 100));
 
     var myMarkers = PlaceModel.places
         .map(
