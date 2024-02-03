@@ -64,6 +64,7 @@ class _HomePageState extends State<HomePage> {
   late GoogleMapController googleMapController;
   Set<Marker> markers = {};
   Set<Polyline> polyLines = {};
+  Set<Polygon> polygons = {};
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -72,6 +73,7 @@ class _HomePageState extends State<HomePage> {
     );
     initMarker();
     initPolylines();
+    initPolygons();
     super.initState();
   }
 
@@ -100,6 +102,7 @@ class _HomePageState extends State<HomePage> {
             // لو انا عاوز اخفي الزوم ان اللي بتكون مجوده علي اليمين
             zoomControlsEnabled: false,
             polylines: polyLines,
+            polygons: polygons,
             markers: markers,
             initialCameraPosition: initialCameraPosition,
           ),
@@ -178,5 +181,21 @@ class _HomePageState extends State<HomePage> {
       ],
     );
     polyLines.add(polyline);
+  }
+
+  void initPolygons() {
+    Polygon polygon = Polygon(
+      fillColor: Colors.black.withOpacity(0.5),
+      strokeWidth: 4,
+      strokeColor: Colors.blue,
+      polygonId: const PolygonId('1'),
+      points: const [
+        LatLng(30.9832273891674, 31.30594561702123),
+        LatLng(31.096409956426584, 31.266654991437182),
+        LatLng(31.131302064119428, 31.36965076854325),
+        LatLng(31.034727031215763, 31.555492023798955)
+      ],
+    );
+    polygons.add(polygon);
   }
 }
