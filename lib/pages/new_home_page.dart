@@ -65,6 +65,7 @@ class _HomePageState extends State<HomePage> {
   Set<Marker> markers = {};
   Set<Polyline> polyLines = {};
   Set<Polygon> polygons = {};
+  Set<Circle> circles = {};
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -74,6 +75,7 @@ class _HomePageState extends State<HomePage> {
     initMarker();
     initPolylines();
     initPolygons();
+    initCircles();
     super.initState();
   }
 
@@ -103,6 +105,7 @@ class _HomePageState extends State<HomePage> {
             zoomControlsEnabled: false,
             polylines: polyLines,
             polygons: polygons,
+            circles: circles,
             markers: markers,
             initialCameraPosition: initialCameraPosition,
           ),
@@ -204,5 +207,17 @@ class _HomePageState extends State<HomePage> {
       ],
     );
     polygons.add(polygon);
+  }
+
+  void initCircles() {
+    Circle elsenblawenCircle = Circle(
+      center: const LatLng(30.884305325026876, 31.461568357597695),
+      radius: 1000,
+      fillColor: Colors.black.withOpacity(.5),
+      strokeWidth: 4,
+      strokeColor: Colors.blue,
+      circleId: const CircleId('1'),
+    );
+    circles.add(elsenblawenCircle);
   }
 }
