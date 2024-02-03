@@ -188,6 +188,13 @@ class _HomePageState extends State<HomePage> {
       fillColor: Colors.black.withOpacity(0.5),
       strokeWidth: 4,
       strokeColor: Colors.blue,
+      holes: const [
+        [
+          LatLng(31.07192900502652, 31.387447016557225),
+          LatLng(31.072191391720388, 31.33414371349293),
+          LatLng(31.09724598411471, 31.383464585868513),
+        ]
+      ],
       polygonId: const PolygonId('1'),
       points: const [
         LatLng(30.9832273891674, 31.30594561702123),
