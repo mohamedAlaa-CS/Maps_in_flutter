@@ -63,6 +63,7 @@ class _HomePageState extends State<HomePage> {
   late CameraPosition initialCameraPosition;
   late GoogleMapController googleMapController;
   Set<Marker> markers = {};
+  Set<Polyline> polyLines = {};
   @override
   void initState() {
     initialCameraPosition = const CameraPosition(
@@ -70,6 +71,7 @@ class _HomePageState extends State<HomePage> {
       target: LatLng(31.0399088096436, 31.38043737066807),
     );
     initMarker();
+    initPolylines();
     super.initState();
   }
 
@@ -97,6 +99,7 @@ class _HomePageState extends State<HomePage> {
 
             // لو انا عاوز اخفي الزوم ان اللي بتكون مجوده علي اليمين
             zoomControlsEnabled: false,
+            polylines: polyLines,
             markers: markers,
             initialCameraPosition: initialCameraPosition,
           ),
@@ -153,5 +156,27 @@ class _HomePageState extends State<HomePage> {
         .toSet();
     markers.addAll(myMarkers);
     setState(() {});
+  }
+
+  void initPolylines() {
+    Polyline polyline = const Polyline(
+      width: 5,
+      startCap: Cap.roundCap,
+      color: Colors.purple,
+      patterns: [PatternItem.dot],
+      endCap: Cap.roundCap,
+      //لو في نقطتين بعاد جدا وعاوز اظهر ان في كيرف بينهم
+      geodesic: true,
+      // لو انا عاوز احدد خط فوق خط
+      zIndex: 1,
+      polylineId: PolylineId('1'),
+      points: [
+        LatLng(30.994302816374745, 31.357091423877332),
+        LatLng(31.006368460199997, 31.411851402011493),
+        LatLng(31.055056936726935, 31.379235741053844),
+        LatLng(31.0826997277597, 31.420434470684558)
+      ],
+    );
+    polyLines.add(polyline);
   }
 }
